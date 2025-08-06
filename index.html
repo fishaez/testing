@@ -12,37 +12,34 @@
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 
   <!-- OneSignal Initialization -->
-  <script defer>
+  <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function (OneSignal) {
       await OneSignal.init({
         appId: "b0908e12-42ca-4627-b550-3178a0527be7",
-        notifyButton: {
-          enable: false
-        },
-        serviceWorkerPath: 'OneSignalSDKWorker.js',
+        notifyButton: { enable: false },
+        serviceWorkerPath: "OneSignalSDKWorker.js"
       });
 
+      // Wait until DOM is fully loaded
       document.addEventListener("DOMContentLoaded", function () {
         const button = document.getElementById("subscribe-btn");
-        if (button) {
-          button.addEventListener("click", async () => {
-            const isPushEnabled = await OneSignal.isPushNotificationsEnabled();
-            if (!isPushEnabled) {
-              await OneSignal.subscribe();
-              alert("✅ Subscribed to notifications!");
-            } else {
-              alert("🔔 You're already subscribed.");
-            }
-          });
-        }
+        button.addEventListener("click", async () => {
+          const isPushEnabled = await OneSignal.isPushNotificationsEnabled();
+          if (!isPushEnabled) {
+            await OneSignal.subscribe();
+            alert("✅ Subscribed to notifications!");
+          } else {
+            alert("🔔 You're already subscribed.");
+          }
+        });
       });
     });
   </script>
 </head>
 
 <body>
-  <h1>SuperNinja</h1>
+  <h1>SuperNinja 2</h1>
   <p>Welcome! Click below to subscribe to push notifications:</p>
   <button id="subscribe-btn">Subscribe</button>
 </body>
